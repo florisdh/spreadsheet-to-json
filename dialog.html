@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base target="_top">
+    </head>
+    <body>
+        <p id="status">The data is being generated...</p>
+        <a id="download" href="" style="visibility:hidden">Download</a>
+    </body>
+    <script>
+
+        var statusIndicator, downloadButton;
+
+        function onLoad() {
+            statusIndicator = document.getElementById("status");
+            downloadButton = document.getElementById("download");
+
+            google.script.run
+                .withSuccessHandler(onSucceed)
+                .withFailureHandler(onError)
+                .generateOutput();
+        }
+
+        function onSucceed(data) {
+            // Update status
+            statusIndicator.innerHTML = "Data has been generated!";
+
+            // Update download button
+            downloadButton.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(data));
+            downloadButton.setAttribute("download", "output.json");
+            downloadButton.style.visibility = "visible";
+        }
+
+        function onError(err) {
+            statusIndicator.innerHTML = "Failed to generate data! " + err;
+        }
+
+        window.onload = onLoad;
+
+    </script>
+</html>
