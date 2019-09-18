@@ -68,12 +68,8 @@ Easilly export your google spreadsheet to a JSON file using this extension.
 3. Download the file by clicking on the *Download* link.
 
 ## Installation
-1. Open script editor
-2. Import sources from repository
-3. Reload your spreadsheet
-
 ### Open script editor
-Open your google spreadsheet and open the script editor from the menu bar **Tools->Script Editor**.
+Open the script editor from the **Tools->Script Editor** button in the menu bar inside of your google spreadsheet.
 
 ### Import sources from repository
 Clone/download this repository and navigate to the **src** directory. You must now import all the source files one-by-one *(afaik)*. To add a source file, click the **File->New->Script file** button in the menu bar of the script editor and copy the content of the file you want to import into the editor. For the html file your must use the **File->New->HTML file** button.
