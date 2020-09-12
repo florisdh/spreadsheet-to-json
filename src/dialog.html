@@ -22,13 +22,23 @@
         }
 
         function onSucceed(data) {
-            // Update status
-            statusIndicator.innerHTML = "Data has been generated!";
+            const url = window.URL || window.webkitURL;
+            if (!url) {
+                // TODO: implement backwards support to msSaveBlob or urlEncoded string
+                statusIndicator.innerHTML = "Feature is not supported in this browser, please try another browser.";
+                return;
+            }
 
-            // Update download button
-            downloadButton.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(data));
+            const blob = new Blob([data], {
+                type: 'text/json;charset=utf-8'
+            })
+            const link = url.createObjectURL(blob);
+
+            downloadButton.setAttribute("href", link);
             downloadButton.setAttribute("download", "output.json");
             downloadButton.style.visibility = "visible";
+
+            statusIndicator.innerHTML = "Data has been generated!";
         }
 
         function onError(err) {
